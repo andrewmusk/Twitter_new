@@ -4,8 +4,23 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, autofocus: true %>
   </div>
 
   <div class="field">
@@ -20,6 +35,31 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <div class="field">
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_select :date_of_birth,:start_year => Time.now.year - 100,
+    :end_year => Time.now.year, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.check_box :is_female, {}, true %> <%= f.label :is_female, "Female" %> 
+  </div>
+
+  <div>
+    <%= f.check_box :is_female, {}, false %> <%= f.label :is_female, "Male"%> 
+  </div>
+
+  <div class="field">
+    <%= f.label :user_bio %><br />
+    <%= f.text_field :user_bio, autofocus: true %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>
