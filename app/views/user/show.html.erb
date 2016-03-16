@@ -1,0 +1,62 @@
+
+<h1>  <%= link_to "Twitter",user_home_path%></h1>
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= @user.name %>
+  </p>
+ 
+  <p>
+    <%= f.label :username %><br>
+    <%= @user.username %>
+  </p>
+
+  <div class="stats">
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following" class="stat">
+      <%= @user.following.count %>
+    </strong>
+    Following
+  </a>
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+      <%= @user.followers.count %>
+    </strong>
+    Followers
+  </a>
+</div>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <%= f.label :phone_number %><br />
+    <%= @user.phone_number %>
+  </p>
+
+  <p>
+    <%= f.label :date_of_birth %><br />
+    <%= @user.date_of_birth %>
+  </p>
+
+  <p>
+    <%= f.label :country %><br />
+    <%= @user.country %>
+  </p>
+
+  <p>
+    <%= f.label :gender %><br />
+    <% if @user.is_female %>
+    <%= "Female"%>
+    <% else %> 
+    <%= "Male"%>              
+    <% end %>
+  </p>
+
+<% end %>
+
+
+
+<%= link_to "Back", :back %>
