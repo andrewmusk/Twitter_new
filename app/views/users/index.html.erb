@@ -1,4 +1,4 @@
-<h1>  <%= link_to "Twitter",user_home_path%></h1>
+<h1>  <%= link_to "Twitter",users_home_path%></h1>
 <div>
 	<h2>
  		<%=@user.name%>
@@ -23,7 +23,7 @@
   </a>
 </div>
 <%= link_to "Edit profile", edit_user_registration_path%>
-<%= link_to "Show Profile", user_path(@user)%>
+<%= link_to "Show Profile", users_path(@user)%>
 <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
 <div>
   <%= form_for @tweet  do |f| %>
@@ -50,10 +50,6 @@
                data: { confirm: 'Are you sure?' } %>
   </p>
 <% end %>
-
-<div>
-	
-</div>
 
 
 

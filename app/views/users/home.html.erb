@@ -1,7 +1,7 @@
-<h1>  <%= link_to "Twitter", user_home_path%></h1>
+<h1>  <%= link_to "Twitter", users_home_path%></h1>
 <div>
   <h2>
-    <%=link_to current_user.name, user_index_path%>
+    <%=link_to current_user.name, users_path%>
     <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
   </h2>
 </div>
@@ -27,5 +27,5 @@
     <% end %>
 </div>
 <div>
-  <%= link_to "Users", user_all_path%>
+  <%= link_to "Users", users_all_path%>
 </div>

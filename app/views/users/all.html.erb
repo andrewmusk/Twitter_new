@@ -1,9 +1,9 @@
-<h1>  <%= link_to "Twitter",user_home_path%></h1>
+<h1>  <%= link_to "Twitter",users_home_path%></h1>
 <h2>Users</h2>
 <% @users.each do |user| %>
   <p>
     <% unless user == current_user%>
-      <%= link_to user.name, user_path(user) %>
+      <%= link_to user.name, users_path(user) %>
       <%= form_for(current_user.active_relationships.build) do |f| %>
       <div>
         <%= hidden_field_tag :followed_id, user.id %>

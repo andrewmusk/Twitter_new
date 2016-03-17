@@ -1,5 +1,5 @@
 
-<h1>  <%= link_to "Twitter",user_home_path%></h1>
+<h1>  <%= link_to "Twitter",users_home_path%></h1>
 <%= form_for @user do |f| %>
   <p>
     <%= f.label :name %><br>
@@ -10,21 +10,6 @@
     <%= f.label :username %><br>
     <%= @user.username %>
   </p>
-
-  <div class="stats">
-  <a href="<%= following_user_path(@user) %>">
-    <strong id="following" class="stat">
-      <%= @user.following.count %>
-    </strong>
-    Following
-  </a>
-  <a href="<%= followers_user_path(@user) %>">
-    <strong id="followers" class="stat">
-      <%= @user.followers.count %>
-    </strong>
-    Followers
-  </a>
-</div>
 
   <p>
     <%= f.label :email %><br />

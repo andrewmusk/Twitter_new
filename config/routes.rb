@@ -6,15 +6,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   resources :tweets
   # You can have the root of your site routed with "root"
-  root 'user#home'
+  root 'users#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  get 'user/home' => 'user#home' 
-  get 'user/all' => 'user#all' 
+  get 'users/home' => 'users#home' 
+  get 'users/all' => 'users#all' 
   post '/follow/:id' => 'relationships#create', as: :follow_create
 
-  resources :user, only: [:index,:show] do
+  resources :users, only: [:index,:show] do
     member do
       get :following, :followers
     end
