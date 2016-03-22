@@ -26,15 +26,7 @@
 <%= link_to "Show Profile", users_path(@user)%>
 <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
 <div>
-  <%= form_for @tweet  do |f| %>
-  <p>
-    <%= f.label :tweet %><br>
-    <%= f.text_area :tweet %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-  <% end %>
+  <%= render 'newtweet' %>
 </div>
 <h2>Tweets</h2>
 <% @user.tweets.reverse_each do |tweet| %>

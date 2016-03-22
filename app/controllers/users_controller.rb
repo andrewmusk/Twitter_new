@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 	end
   def home 
+    @tweet = Tweet.new
     @tweets = Tweet.all
   end
   def all

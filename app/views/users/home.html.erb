@@ -6,6 +6,9 @@
   </h2>
 </div>
 <div>
+  <%= render 'newtweet' %>
+</div>
+<div>
   <h2>Tweets</h2>
     <% @tweets.reverse_each do |tweet| %>
     <% current_user.followers.each do |follow|%>
@@ -13,15 +16,21 @@
     <% end %>
       <% if current_user.following(tweet.user_id) || current_user.id == tweet.user_id %>
         <p>
-          <strong>
-          <% person = User.find(tweet.user_id)  %>
-          <%= person.username  %>
-          <%=tweet.created_at  %>
-          </strong>
-          <%= tweet.tweet %>
-          <%= link_to 'Delete', tweet,
-                   method: :delete,
-                   data: { confirm: 'Are you sure?' } %>
+          <ul>
+            <li>
+            <strong>
+              <% person = User.find(tweet.user_id)  %>
+              <%= person.username  %>
+              <%=tweet.created_at  %>
+            </strong>
+            <%= tweet.tweet %>
+            <% if person == current_user%>
+              <%= link_to 'Delete', tweet,
+                     method: :delete,
+                     data: { confirm: 'Are you sure?' } %>
+            <% end %> 
+            </li>
+          </ul>
         </p>
       <% end -%>
     <% end %>
