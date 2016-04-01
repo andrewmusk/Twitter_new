@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :tweets
+  resources :hashtags
+
   # You can have the root of your site routed with "root"
   root 'users#home'
 
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   get 'users/all' => 'users#all' 
   post '/follow/:id' => 'relationships#create', as: :follow_create
 
-  resources :users, only: [:index,:show] do
+  resources :users, only: [:index,:show,:edit,:update] do
     member do
       get :following, :followers
     end

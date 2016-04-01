@@ -11,6 +11,18 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
+  def render_with_hashtags(tweet)
+    tweet_words = tweet.split(" ")
+    tweet_with_links = tweet_words.map do |word| 
+    if word.include?("#")
+        link_to word, hashtag_path(word)
+      else
+        word
+      end
+    end
+    return tweet_with_links.join(" ")
+  end
+
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end

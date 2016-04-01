@@ -1,47 +1,66 @@
-
 <h1>  <%= link_to "Twitter",users_home_path%></h1>
-<%= form_for @user do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= @user.name %>
-  </p>
- 
-  <p>
-    <%= f.label :username %><br>
-    <%= @user.username %>
-  </p>
+<div>
+  <h2>
+    <%=@user.name%>
+    <h3>
+      @<%= @user.username%>
+    </h3>
+  </h2>
+  <h3><%= @user.user_bio%></h3>
+</div>
+<div class="stats">
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following" class="stat">
+      <%= @user.following.count %>
+    </strong>
+    Following
+  </a>
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+      <%= @user.followers.count %>
+    </strong>
+    Followers
+  </a>
+</div>
+
+<div>
+  <% if @user == current_user %>
+    <%= link_to "Edit profile", edit_user_registration_path%>
+  <% end %>
+  <% unless @user == current_user%>
+      <%= form_for(current_user.active_relationships.build) do |f| %>
+      <div>
+        <%= hidden_field_tag :followed_id, @user.id %>
+      </div>
+      <% if current_user.following?(@user) %>
+        <%= f.submit "Follow", class: "btn btn-primary" %>
+      <% end %>
+    <%end%>
+  <% end %>
+  <%= link_to "Show Profile", users_path(@user)%>
+  <% if @user == current_user %>
+    <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+  <% end %>
+</div>
+<% if @user == current_user%>
+<div>
+  <%= render 'newtweet' %>
+</div>
+<% end %>
+<h2>Tweets</h2>
+<% @user.tweets.reverse_each do |tweet| %>
 
   <p>
-    <%= f.label :email %><br />
-    <%= @user.email %>
-  </p>
-
-  <p>
-    <%= f.label :phone_number %><br />
-    <%= @user.phone_number %>
-  </p>
-
-  <p>
-    <%= f.label :date_of_birth %><br />
-    <%= @user.date_of_birth %>
-  </p>
-
-  <p>
-    <%= f.label :country %><br />
-    <%= @user.country %>
-  </p>
-
-  <p>
-    <%= f.label :gender %><br />
-    <% if @user.is_female %>
-    <%= "Female"%>
-    <% else %> 
-    <%= "Male"%>              
+    <strong>
+    <%=@user.name  %>
+    <%=tweet.created_at  %>
+    </strong>
+    <%= tweet.tweet %>
+    <% if @user == current_user %>
+    <%= link_to 'Edit', edit_tweet_path(tweet) %>
+    <%= link_to 'Delete', tweet,
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
     <% end %>
   </p>
-
 <% end %>
-
-
-
-<%= link_to "Back", :back %>
