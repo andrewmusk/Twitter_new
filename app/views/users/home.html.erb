@@ -12,30 +12,27 @@
 </div>
 <div>
   <h2>Tweets</h2>
-    <% @tweets.reverse_each do |tweet| %>
-    <% current_user.followers.each do |follow|%>
-      <% follow %>
+  <% @tweets.reverse_each do |tweet| %>
+    <% if current_user.following?(tweet.user_id) || current_user.id == tweet.user_id %>
+      <p>
+        <ul>
+          <li>
+          <strong>
+            <% person = User.find(tweet.user_id)  %>
+            <%= link_to person.username, user_path(person)  %>
+            <%=tweet.created_at  %>
+          </strong>
+          <%= render_with_hashtags(tweet.tweet).html_safe %>
+          <% if person == current_user %>
+            <%= link_to 'Delete', tweet,
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' } %>
+          <% end %> 
+          </li>
+        </ul>
+      </p>
     <% end %>
-      <% if current_user.following(tweet.user_id) || current_user.id == tweet.user_id %>
-        <p>
-          <ul>
-            <li>
-            <strong>
-              <% person = User.find(tweet.user_id)  %>
-              <%= link_to person.username, user_path(person)  %>
-              <%=tweet.created_at  %>
-            </strong>
-            <%= render_with_hashtags(tweet.tweet).html_safe %>
-            <% if person == current_user%>
-              <%= link_to 'Delete', tweet,
-                     method: :delete,
-                     data: { confirm: 'Are you sure?' } %>
-            <% end %> 
-            </li>
-          </ul>
-        </p>
-      <% end -%>
-    <% end %>
+  <% end -%>
 </div>
 <div>
   <%= link_to "Users", users_all_path%>

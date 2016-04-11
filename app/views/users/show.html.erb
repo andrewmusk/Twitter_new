@@ -32,7 +32,7 @@
       <div>
         <%= hidden_field_tag :followed_id, @user.id %>
       </div>
-      <% if current_user.following?(@user) %>
+      <% unless current_user.following?(@user) %>
         <%= f.submit "Follow", class: "btn btn-primary" %>
       <% end %>
     <%end%>
@@ -55,7 +55,7 @@
     <%=@user.name  %>
     <%=tweet.created_at  %>
     </strong>
-    <%= tweet.tweet %>
+    <%= render_with_hashtags(tweet.tweet).html_safe %>
     <% if @user == current_user %>
     <%= link_to 'Edit', edit_tweet_path(tweet) %>
     <%= link_to 'Delete', tweet,

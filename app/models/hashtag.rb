@@ -1,5 +1,6 @@
 class Hashtag < ActiveRecord::Base
-  has_and_belongs_to_many :tweets
+  has_many :tweets, through: :linkings
+  has_many :linkings
 
   def render_with_hashtags
     tweet_words = tweet.split(" ")

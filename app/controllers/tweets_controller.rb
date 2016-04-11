@@ -32,8 +32,9 @@ class TweetsController < ApplicationController
           tweet.hashtags.create(hashtag: word)
         else
           @hashtag = Hashtag.find_by(hashtag: word)
-          tweet.hashtags.create(@hashtag)
+          tweet.linking.create(hashtag_id: @hashtag.id, tweet_id: @tweet.id)
         end
+        
       end
     end
   end
